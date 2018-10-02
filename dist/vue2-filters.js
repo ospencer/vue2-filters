@@ -588,8 +588,11 @@ function find(arr, search)
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__currency__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__pluralize__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ordinalize__ = __webpack_require__(16);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "currency", function() { return __WEBPACK_IMPORTED_MODULE_0__currency__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "pluralize", function() { return __WEBPACK_IMPORTED_MODULE_1__pluralize__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ordinalize", function() { return __WEBPACK_IMPORTED_MODULE_2__ordinalize__["a"]; });
+
 
 
 
@@ -673,11 +676,38 @@ function currency (value, symbol, decimals, options) {
 function pluralize (value) {
   var args = __WEBPACK_IMPORTED_MODULE_0__util_index__["a" /* default */].toArray(arguments, 1)
   return args.length > 1
-    ? (args[value % 10 - 1] || args[args.length - 1])
+    ? (args[value - 1] || args[args.length - 1])
     : (args[0] + (value === 1 ? '' : 's'))
 }
 
 /* harmony default export */ __webpack_exports__["a"] = (pluralize);
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util_index__ = __webpack_require__(0);
+
+
+var endings = ['th', 'st', 'nd', 'rd']
+
+/**
+ * 42 => '42nd'
+ *
+ * @params
+ *  A single number to be ordinalized.
+ *  Numbers ending in '1' are appended with 'st'.
+ *  Numbers ending in '2' are appended with 'nd'.
+ *  Numbers ending in '3' are appended with 'rd'.
+ *  All other numbers are appended with 'th'.
+ */
+
+function ordinalize (value) {
+  return value + (endings[value % 10] || endings[0])
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (ordinalize);
 
 /***/ })
 /******/ ]);
